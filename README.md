@@ -37,7 +37,7 @@ run `python capture.py --help` to see other options
 The challenge is to design agents to play Capture-the-Flag in a Pacman-like
 arena.   
 
-![Example Game](/origdocs/capture_the_flag.png)
+![Example Game](/origdoc/capture_the_flag.png)
 
 #### Rules
 
