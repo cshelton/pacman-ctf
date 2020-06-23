@@ -123,7 +123,9 @@ def loadModuleString(moduleSource):
     #f = StringIO(moduleCodeDict[k])
     #tmp = importlib.load_module(k, f, k, (".py", "r", importlib.PY_SOURCE))
     tmp = importlib.new_module(k)
-    exec moduleCodeDict[k] in tmp.__dict__
+    # cshelton: guess at correct translation to Python 3
+    #exec moduleCodeDict[k] in tmp.__dict__
+    exec(moduleCodeDict[k],tmp.__dict__)
     setModuleName(tmp, k)
     return tmp
 
@@ -187,7 +189,7 @@ def printTest(testDict, solutionDict):
     print("Test case:")
     for line in testDict["__raw_lines__"]:
         print("   |", line)
-    print "Solution:"
+    print("Solution:")
     for line in solutionDict["__raw_lines__"]:
         print("   |", line)
 
