@@ -275,7 +275,7 @@ class Counter(dict):
         Returns the key with the highest value.
         """
         if len(self.keys()) == 0: return None
-        all = self.items()
+        all = list(self.items())
         values = [x[1] for x in all]
         maxIndex = values.index(max(values))
         return all[maxIndex][0]
@@ -292,7 +292,7 @@ class Counter(dict):
         >>> a.sortedKeys()
         ['second', 'third', 'first']
         """
-        sortedItems = self.items()
+        sortedItems = list(self.items())
         compare = lambda x, y:  sign(y[1] - x[1])
         sortedItems.sort(cmp=compare)
         return [x[0] for x in sortedItems]
