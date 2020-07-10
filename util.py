@@ -293,8 +293,7 @@ class Counter(dict):
         ['second', 'third', 'first']
         """
         sortedItems = list(self.items())
-        compare = lambda x, y:  sign(y[1] - x[1])
-        sortedItems.sort(cmp=compare)
+        sortedItems.sort(key=(lambda x: x[1]))
         return [x[0] for x in sortedItems]
 
     def totalCount(self):
