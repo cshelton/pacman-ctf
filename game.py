@@ -167,15 +167,18 @@ class Grid:
 
     The __str__ method constructs an output that is oriented like a pacman board.
     """
-    def __init__(self, width, height, initialValue=False, bitRepresentation=None):
+    def __init__(self, width, height, initialValue=False, bitRepresentation=None, initdata=None):
         if initialValue not in [False, True]: raise Exception('Grids can only contain booleans')
         self.CELLS_PER_INT = 30
 
         self.width = width
         self.height = height
-        self.data = [[initialValue for y in range(height)] for x in range(width)]
-        if bitRepresentation:
-            self._unpackBits(bitRepresentation)
+        if initdata is None:
+            self.data = [[initialValue for y in range(height)] for x in range(width)]
+            if bitRepresentation:
+                self._unpackBits(bitRepresentation)
+        else:
+            self.data = initdata
 
     def __getitem__(self, i):
         return self.data[i]
@@ -204,16 +207,16 @@ class Grid:
         return hash(h)
 
     def copy(self):
-        g = Grid(self.width, self.height)
-        g.data = [x[:] for x in self.data]
+        g = Grid(self.width, self.height, initdata=[x[:] for x in self.data])
+        #g.data = [x[:] for x in self.data]
         return g
 
     def deepCopy(self):
         return self.copy()
 
     def shallowCopy(self):
-        g = Grid(self.width, self.height)
-        g.data = self.data
+        g = Grid(self.width, self.height, initdata=self.data)
+        #g.data = self.data
         return g
 
     def count(self, item =True ):
